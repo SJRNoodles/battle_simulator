@@ -1,0 +1,19 @@
+{
+  "name":"Base", 
+  "sprite":"https://sjrnoodles.github.io/battle_simulator/assets/enemy_.png",
+  "health":120,
+  "moves": {
+    "sword":{
+      "dmg":25,
+      "crit_chance":3
+    },
+    "blast":{
+      "dmg":50,
+      "crit_chance":5
+    },
+    "boom":{
+      "dmg":65,
+      "crit_chance":2
+    } 
+  }
+}
