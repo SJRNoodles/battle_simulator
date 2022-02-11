@@ -5,15 +5,15 @@
   "moves": {
     "sword":{
       "dmg":25,
-      "crit_chance":3;
+      "crit_chance":3
     },
     "blast":{
       "dmg":50,
-      "crit_chance":5;
+      "crit_chance":5
     },
     "boom":{
       "dmg":65,
-      "crit_chance":2;
+      "crit_chance":2
     } 
   }
 }
