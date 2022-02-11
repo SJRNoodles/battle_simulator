@@ -2,6 +2,18 @@
   "name":"Base", 
   "sprite":"https://sjrnoodles.github.io/battle_simulator/assets/default_.png",
   "health":120,
-  "moves":["1","2","3"],
-  "move_syntax":"https://sjrnoodles.github.io/battle_simulator/base/player_syntax.json"
+  "moves": {
+    "sword":{
+      "dmg":25,
+      "crit_chance":3;
+    },
+    "blast":{
+      "dmg":50,
+      "crit_chance":5;
+    },
+    "boom":{
+      "dmg":65,
+      "crit_chance":2;
+    } 
+  }
 }
