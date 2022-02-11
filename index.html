@@ -12,17 +12,26 @@ text-align:center;
 #head{
 background-color:gray;
 }
+#viewport{
+width:80%;
+}
 </style>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <body>
 <h1 id="head">sjrnoodles' battle simulator</h1>
 Welcome to the battle simulator. This is in development!
 <br>
-<canvas id="viewport" width="480" height="360" style="border:1px solid #000000;">
+<canvas id="viewport" width="180" height="120" style="border:1px solid #000000;">
 </canvas>
 </body>
 
 <script>
+  // SJRNOODLES'
+  // B A T T L E S I M U L A T O R
+  // 2022 sjrnoodles
+  
+  // game vars
+  //const player = fetch('https://sjrnoodles.github.io/battle_simulator/base/player.json');
   // https://stackoverflow.com/a/35970894
   var getJSON = function(url, callback) {
       var xhr = new XMLHttpRequest();
@@ -38,12 +47,29 @@ Welcome to the battle simulator. This is in development!
       };
       xhr.send();
   };
-  var base_plr = new Image();
-  base_plr.src = "https://sjrnoodles.github.io/battle_simulator/assets/default_.png";
-  var c = document.getElementById("viewport");
-  var ctx = c.getContext("2d");
-  var img = base_plr;
-  ctx.drawImage(img,10,10);
+  function basic_render(){
+  	var c = document.getElementById("viewport");
+    var ctx = c.getContext("2d");
+    
+    //bg
+    var base_bg = new Image();
+    base_bg.src = "https://sjrnoodles.github.io/battle_simulator/assets/bg_canvas.png";
+    var bg = base_bg;
+    ctx.drawImage(bg,0,0);
+    
+    // player
+    var base_plr = new Image();
+    base_plr.src = "https://sjrnoodles.github.io/battle_simulator/assets/default_.png";
+    var img = base_plr;
+    ctx.drawImage(img,30,60);
+
+    // enemy
+    var base_en = new Image();
+    base_en.src = "https://sjrnoodles.github.io/battle_simulator/assets/enemy_.png";
+    var img2 = base_en;
+    ctx.drawImage(img2,110,60);
+  }
+  basic_render();
 </script>
 
 </html>
