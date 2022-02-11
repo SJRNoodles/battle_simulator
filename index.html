@@ -1,3 +1,4 @@
+    
 <!DOCTYPE html>
 <html>
 <style>
@@ -31,22 +32,19 @@ Welcome to the battle simulator. This is in development!
   // 2022 sjrnoodles
   
   // game vars
-  //const player = fetch('https://sjrnoodles.github.io/battle_simulator/base/player.json');
-  // https://stackoverflow.com/a/35970894
-  var getJSON = function(url, callback) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url, true);
-      xhr.responseType = 'json';
-      xhr.onload = function() {
-        var status = xhr.status;
-        if (status === 200) {
-          callback(null, xhr.response);
-        } else {
-          callback(status, xhr.response);
-        }
-      };
-      xhr.send();
-  };
+ function readJSON(file) {
+    var request = new XMLHttpRequest();
+    request.open('GET', file, false);
+    request.send(null);
+    if (request.status == 200)
+        return request.responseText;
+};
+
+const player = JSON.parse(readJSON('https://sjrnoodles.github.io/battle_simulator/base/player.json'));
+console.log(JSON.parse(readJSON('https://sjrnoodles.github.io/battle_simulator/base/player.json')));
+
+
+
   function basic_render(){
   	var c = document.getElementById("viewport");
     var ctx = c.getContext("2d");
@@ -59,7 +57,8 @@ Welcome to the battle simulator. This is in development!
     
     // player
     var base_plr = new Image();
-    base_plr.src = "https://sjrnoodles.github.io/battle_simulator/assets/default_.png";
+    console.log(String(player.sprite));
+    base_plr.src = String(player.sprite);
     var img = base_plr;
     ctx.drawImage(img,30,60);
 
