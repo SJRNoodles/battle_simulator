@@ -10,8 +10,8 @@
       "crit_chance":3
     },
     "m2":{
-      "name":"potion",
-      "type":"heal",
+      "name":"blast",
+      "type":"attack",
       "dmg":500,
       "crit_chance":5
     },
