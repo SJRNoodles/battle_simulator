@@ -1,7 +1,7 @@
 {
   "name":"Base", 
   "sprite":"https://sjrnoodles.github.io/battle_simulator/assets/default_.png",
-  "health":120,
+  "health":9200,
   "moves": {
     "m1":{
       "name":"sword",
