@@ -45,28 +45,32 @@ border:none;
 Player files are JSON files. You can use them by linking them in the customize battle section. Player files should be easy to understand.
 <hr>
 <code>
-  {
+ {
   "name":"Base", 
   "sprite":"https://sjrnoodles.github.io/battle_simulator/assets/default_.png",
   "health":9200,
   "moves": {
     "m1":{
       "name":"sword",
+      "type":"attack",
       "dmg":250,
       "crit_chance":3
     },
     "m2":{
       "name":"blast",
+      "type":"attack",
       "dmg":500,
       "crit_chance":5
     },
     "m3":{
       "name":"boom",
+      "type":"attack",
       "dmg":650,
       "crit_chance":2
     } 
   }
 }
+
 </code>
 <h2>Custom sprites</h2>
 The sprite variable in the JSON file contains a link to a png image. Recommended sizes for your custom player sprite should be 32x32 up to around 64x64.
