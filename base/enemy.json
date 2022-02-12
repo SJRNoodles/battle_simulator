@@ -5,17 +5,17 @@
   "moves": {
     "m1":{
       "name":"sword",
-      "dmg":25,
+      "dmg":250,
       "crit_chance":3
     },
     "m2":{
       "name":"blast",
-      "dmg":50,
+      "dmg":500,
       "crit_chance":5
     },
     "m3":{
       "name":"boom",
-      "dmg":65,
+      "dmg":650,
       "crit_chance":2
     } 
   }
