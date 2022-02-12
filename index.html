@@ -5,6 +5,7 @@ html,body{
 margin:0;
 width:100%;
 height:100%;
+font-family:Arial;
 }
 h1 {
 text-align:center;
@@ -41,7 +42,13 @@ border:none;
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <body>
 <h1 id="head">sjrnoodles' battle simulator</h1>
-Welcome to the battle simulator. This is in development!
+Welcome to SJRNoodles' Battle Simulator! A basic battle simulator with moddable characters!
+<hr>
+Characters are stored as JSON files. You can easily mod the json files to be your own character, and use them in-game!
+<hr>
+You can also edit the background and music!
+<hr>
+To play, hit the Start Game button.
 <br>
 <div id="game">
 <canvas id="viewport" width="180" height="120" style="border:1px solid #000000;">
@@ -51,12 +58,42 @@ Welcome to the battle simulator. This is in development!
 <button onclick="moves()">Move</button>
 </div>
 </div>
+<button onclick="startGame()">Start Game</button>
+<h2>Customize Battle</h2>
+Notice: Use custom player json files at your own risk! (you should look through custom player JSON's to make sure they aren't malicious)
+<br>
+Player (must be link to json)
+<input type="text" id="p1" name="p1" value="https://sjrnoodles.github.io/battle_simulator/base/player.json">
+<br>
+Enemy (must be link to json)
+<input type="text" id="p2" name="p2" value="https://sjrnoodles.github.io/battle_simulator/base/enemy.json">
+<br>
+Background (must be 180x120)
+<input type="text" id="bg" name="bg" value="https://sjrnoodles.github.io/battle_simulator/assets/bg_canvas.png">
+<br>
+Music (.mp3 - .wav)
+<input type="text" id="mc" name="mc" value="https://vgmsite.com/soundtracks/crows-claw-final-fantasy-hm-arrange/xgposhww/05.%20tina%27s%20theme%20%5Bfinal%20fantasy%206%5D.mp3">
 </body>
 
 <script>
   // SJRNOODLES'
   // B A T T L E S I M U L A T O R
   // 2022 sjrnoodles
+  
+  var playerJSONLink = document.getElementById("p1").value;
+  var enemyJSONLink = document.getElementById("p2").value;
+  var bgLink = document.getElementById("bg").value;
+  var musicLink = document.getElementById("mc").value;
+  
+  var power1 =0;
+  var power2 =0;
+  
+  const music = new Audio('https://vgmsite.com/soundtracks/crows-claw-final-fantasy-hm-arrange/xgposhww/05.%20tina%27s%20theme%20%5Bfinal%20fantasy%206%5D.mp3');
+	music.loop =true;
+	music.playbackRate = 1;
+  
+  const hurt = new Audio('https://sjrnoodles.github.io/battle_simulator/assets/hitHurt.wav');
+  const crit = new Audio('https://sjrnoodles.github.io/battle_simulator/assets/pickupCoin.wav');
   
   // game vars
  function readJSON(file) {
@@ -71,10 +108,13 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-const player = JSON.parse(readJSON('https://sjrnoodles.github.io/battle_simulator/base/player.json'));
-const enemy = JSON.parse(readJSON('https://sjrnoodles.github.io/battle_simulator/base/enemy.json'));
+var player = JSON.parse(readJSON(playerJSONLink));
+var enemy = JSON.parse(readJSON(enemyJSONLink));
+var enemy = String();
 var shake = 0;
+var crit_text = 0;
 var turn = 0;
+var game = false;
 
 console.log(player.moves.m1.name);
 
@@ -85,13 +125,35 @@ function moves(){
 }
 
 function moveAfter(){
+hurt.play();
 	if(Math.round(Math.random() * (1 - 3) + 1) == 1){
   	player.health -= enemy.moves.m1.dmg;
+    power2 = enemy.moves.m1.dmg / 32;
+    if(Math.round(Math.random() * (1 - enemy.moves.m1.crit_chance) + 1) == 1){
+    	player.health -= enemy.moves.m1.dmg * 2;
+      console.log("critical");
+      crit_text = 300;
+      crit.play();
+    }
   }else{
   	if(Math.round(Math.random() * (1 - 2) + 1) == 2){
+    	power2 = enemy.moves.m2.dmg / 32;
   		player.health -= enemy.moves.m2.dmg;
+     		 if(Math.round(Math.random() * (1 - enemy.moves.m2.crit_chance) + 1) == 1){
+    			player.health -= enemy.moves.m2.dmg * 2;
+          console.log("critical");
+          crit_text = 300;
+          crit.play();
+    		}
   	}else{
+    		power2 = enemy.moves.m3.dmg / 32;
   			player.health -= enemy.moves.m3.dmg;
+        if(Math.round(Math.random() * (1 - enemy.moves.m3.crit_chance) + 1) == 1){
+    			player.health -= enemy.moves.m3.dmg * 2;
+          console.log("critical");
+          crit_text = 300;
+          crit.play();
+    		}
     }
   }
   shake = 2;
@@ -99,58 +161,94 @@ function moveAfter(){
 }
 console.log(player.health);
 function move1(){
-	if (turn == 0){
-  	turn = 1;
-		enemy.health -= player.moves.m1.dmg;
-  	shake = 2;
-  	setTimeout(moveAfter, 1000);
- 		console.log(enemy.health);
+	if (game == true){
+    if (turn == 0){
+    hurt.play();
+      turn = 1;
+      enemy.health -= player.moves.m1.dmg;
+      power1 = player.moves.m1.dmg / 32;
+      if(Math.round(Math.random() * (1 - player.moves.m1.crit_chance) + 1) == 1){
+          enemy.health -= enemy.moves.m1.dmg * 2;
+          console.log("critical");
+          crit_text = 300;
+          crit.play();
+      }
+      shake = 2;
+      setTimeout(moveAfter, 1000);
+      console.log(enemy.health);
+    }
   }
 }
 
 function move2(){
-	if (turn == 0){
-  	turn = 1;
-		enemy.health -= player.moves.m2.dmg;
-  	shake = 2;
-  	setTimeout(moveAfter, 1000);
- 		console.log(enemy.health);
+	if (game == true){
+    if (turn == 0){
+    hurt.play();
+      turn = 1;
+      enemy.health -= player.moves.m2.dmg;
+      power1 = player.moves.m2.dmg / 32;
+      if(Math.round(Math.random() * (1 - player.moves.m2.crit_chance) + 1) == 1){
+          enemy.health -= enemy.moves.m2.dmg * 2;
+          console.log("critical");
+          crit_text = 300;
+          crit.play();
+      }
+      shake = 2;
+      setTimeout(moveAfter, 1000);
+      console.log(enemy.health);
+    }
   }
 }
 
 function move3(){
-	if (turn == 0){
-  	turn = 1;
-		enemy.health -= player.moves.m3.dmg;
-  	shake = 2;
-  	setTimeout(moveAfter, 1000);
- 		console.log(enemy.health);
+	if (game == true){
+    if (turn == 0){
+    hurt.play();
+      turn = 1;
+      enemy.health -= player.moves.m3.dmg;
+      power1 = player.moves.m3.dmg / 32;
+      if(Math.round(Math.random() * (1 - player.moves.m3.crit_chance) + 1) == 1){
+          enemy.health -= enemy.moves.m3.dmg * 2;
+          console.log("critical");
+          crit_text = 300;
+          crit.play();
+      }
+      shake = 2;
+      setTimeout(moveAfter, 1000);
+      console.log(enemy.health);
+    }
   }
 }
 
 var c = document.getElementById("viewport");
 var b1 = (player.health / 40);
+var b2 = (enemy.health / 40);
     var ctx = c.getContext("2d");
-
+var base_bg = new Image();
+base_bg.src = "https://sjrnoodles.github.io/battle_simulator/assets/bg_canvas.png";
   function basic_render(){
     
     //bg
-    var base_bg = new Image();
-    base_bg.src = "https://sjrnoodles.github.io/battle_simulator/assets/bg_canvas.png";
     var bg = base_bg;
     ctx.drawImage(bg,0 + getRandomArbitrary(shake * -1, shake),getRandomArbitrary(shake * -1, shake));
     
     // player
-    var base_plr = new Image();
-    base_plr.src = String(player.sprite);
-    var img = base_plr;
-    ctx.drawImage(img,30,60 + getRandomArbitrary(shake * -1, shake));
+    if (player.health > 1) {
+      var base_plr = new Image();
+      base_plr.src = String(player.sprite);
+      var img = base_plr;
+      ctx.drawImage(img,30 + power1,60 + getRandomArbitrary(shake * -1, shake));
+    }
 
     // enemy
-    var base_en = new Image();
-    base_en.src = "https://sjrnoodles.github.io/battle_simulator/assets/enemy_.png";
-    var img2 = base_en;
-    ctx.drawImage(img2,110,60 + getRandomArbitrary(shake * -1, shake));
+    if (enemy.health > 1) {
+      var base_en = new Image();
+      base_en.src = String(enemy.sprite);
+      var img2 = base_en;
+      ctx.scale(-1,1);
+      ctx.drawImage(img2,-150 + power2,60 + getRandomArbitrary(shake * -1, shake,img2.width * -1,img2.height));
+      ctx.scale(-1,1);
+    }
   }
   
   function gui_render(){
@@ -172,16 +270,45 @@ ctx.fillStyle = "white";
 ctx.textAlign = "center";
 ctx.fillText("Health:", 120, 8);
 ctx.fillStyle = "red";
-  ctx.fillRect(135, 3, enemy.health / b1, 5);
+  ctx.fillRect(135, 3, enemy.health / b2, 5);
   }
   
   function render(){
-  shake += shake * -0.2;
+  	shake += shake * -0.2;
+    crit_text += crit_text * -0.05;
   	basic_render();
     gui_render();
+    
+    ctx.font = "15px Arial";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText("CRITICAL HIT", (c.width/2) - 200 + (crit_text), c.height/2);
+    
+    power1 += power1 * -0.3;
+    power2 += power2 * -0.3;
+    
+    if (enemy.health < 1 || player.health < 1) {
+    	if (enemy.health < 1){player.health = b1 * 40}
+      if (player.health < 1){enemy.health = b2 * 40}
+    	game=false;
+    }
   }
-  
- window.onload = setInterval(render,1000/30);
+  function startGame(){
+  	playerJSONLink = document.getElementById("p1").value;
+  	enemyJSONLink = document.getElementById("p2").value;
+  	bgLink = document.getElementById("bg").value;
+  	musicLink = document.getElementById("mc").value;
+  	player = JSON.parse(readJSON(playerJSONLink));
+		enemy = JSON.parse(readJSON(enemyJSONLink));
+    music.src = musicLink;
+    base_bg.src = bgLink;
+    b1 = (player.health / 40);
+		b2 = (enemy.health / 40);
+    
+  	music.play();
+  	game=true;
+  }
+ window.onload = setInterval(render,1000/24);
 </script>
 
 </html>
