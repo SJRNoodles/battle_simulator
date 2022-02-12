@@ -13,7 +13,7 @@
       "dmg":50,
       "crit_chance":5
     },
-    "m2":{
+    "m3":{
       "name":"boom",
       "dmg":65,
       "crit_chance":2
