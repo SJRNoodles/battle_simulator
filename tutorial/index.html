@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<style>
+html,body{
+margin:0;
+width:100%;
+height:100%;
+font-family:Arial;
+}
+h1 {
+text-align:center;
+}
+#head{
+background-color:gray;
+}
+#viewport{
+width:50%;
+padding:5px;
+background:black;
+padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+#game{
+padding:5px;
+background:black;
+padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+button{
+width:15%;
+background:gray;
+padding:5px;
+border:none;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<body>
+<h1 id="head">sjrnoodles' battle simulator</h1>
+Player files are JSON files. You can use them by linking them in the customize battle section. Player files should be easy to understand.
+<hr>
+<code>
+  {
+  "name":"Base", 
+  "sprite":"https://sjrnoodles.github.io/battle_simulator/assets/default_.png",
+  "health":9200,
+  "moves": {
+    "m1":{
+      "name":"sword",
+      "dmg":250,
+      "crit_chance":3
+    },
+    "m2":{
+      "name":"blast",
+      "dmg":500,
+      "crit_chance":5
+    },
+    "m3":{
+      "name":"boom",
+      "dmg":650,
+      "crit_chance":2
+    } 
+  }
+}
+</code>
+<h2>Custom sprites</h2>
+The sprite variable in the JSON file contains a link to a png image. Recommended sizes for your custom player sprite should be 32x32 up to around 64x64.
+<h2>Crit Chances</h2>
+Crit chances are chances or critical hits. If a crit chance is 2, that would be a 1 in 2 chance (50%) of a critical hit!
+<h2>Notices</h2>
+Do not change names "m1","m2", or "m3". You should change the name of the attack via the name variable!
+<hr>
+I don't own any custom made avatars!
+<hr>
+Use custom player json files at your own risk! (you should look through custom player JSON's to make sure they aren't malicious)
+</body>
+</html>
