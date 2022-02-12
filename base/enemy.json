@@ -1,20 +1,23 @@
 {
-  "name":"Enemy", 
+  "name":"Base", 
   "sprite":"https://sjrnoodles.github.io/battle_simulator/assets/enemy_.png",
-  "health":9020,
+  "health":9200,
   "moves": {
     "m1":{
       "name":"sword",
+      "type":"attack",
       "dmg":250,
       "crit_chance":3
     },
     "m2":{
-      "name":"blast",
+      "name":"potion",
+      "type":"heal",
       "dmg":500,
       "crit_chance":5
     },
     "m3":{
       "name":"boom",
+      "type":"attack",
       "dmg":650,
       "crit_chance":2
     } 
