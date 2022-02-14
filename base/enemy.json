@@ -1,7 +1,7 @@
 {
   "name":"Enemy", 
   "sprite":"https://sjrnoodles.github.io/battle_simulator/assets/enemy_.png",
-  "health":3200,
+  "health":9200,
   "moves": {
     "m1":{
       "name":"berry",
