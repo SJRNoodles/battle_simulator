@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <style>
@@ -129,34 +130,53 @@ function moves(){
 
 function moveAfter(){
 hurt.play();
+document.getElementById("buttons").innerHTML = "<button onclick='moves()'>Move</button>"
 	if(Math.round(Math.random() * (1 - 3) + 1) == 1){
-  	player.health -= enemy.moves.m1.dmg;
-    power2 = enemy.moves.m1.dmg / 32;
-    if(Math.round(Math.random() * (1 - enemy.moves.m1.crit_chance) + 1) == 1){
-    	player.health -= enemy.moves.m1.dmg * 2;
-      console.log("critical");
-      crit_text = 300;
-      crit.play();
-    }
+      if(enemy.moves.m1.type == "attack"){
+          player.health -= enemy.moves.m1.dmg;
+          power2 = enemy.moves.m1.dmg / 32;
+          if(Math.round(Math.random() * (1 - enemy.moves.m1.crit_chance) + 1) == 1){
+              player.health -= enemy.moves.m1.dmg * 2;
+              console.log("critical");
+              crit_text = 300;
+              crit.play();
+          }
+      }
+      if(enemy.moves.m1.type == "heal"){
+           enemy.health += enemy.moves.m1.dmg;
+           crit.play();
+      }
   }else{
   	if(Math.round(Math.random() * (1 - 2) + 1) == 2){
-    	power2 = enemy.moves.m2.dmg / 32;
-  		player.health -= enemy.moves.m2.dmg;
-     		 if(Math.round(Math.random() * (1 - enemy.moves.m2.crit_chance) + 1) == 1){
-    			player.health -= enemy.moves.m2.dmg * 2;
-          console.log("critical");
-          crit_text = 300;
-          crit.play();
-    		}
+    	 if(enemy.moves.m2.type == "attack"){
+          player.health -= enemy.moves.m2.dmg;
+          power2 = enemy.moves.m2.dmg / 32;
+          if(Math.round(Math.random() * (1 - enemy.moves.m2.crit_chance) + 1) == 1){
+              player.health -= enemy.moves.m2.dmg * 2;
+              console.log("critical");
+              crit_text = 300;
+              crit.play();
+          }
+      }
+      if(enemy.moves.m2.type == "heal"){
+           enemy.health += enemy.moves.m2.dmg;
+           crit.play();
+      }
   	}else{
-    		power2 = enemy.moves.m3.dmg / 32;
-  			player.health -= enemy.moves.m3.dmg;
-        if(Math.round(Math.random() * (1 - enemy.moves.m3.crit_chance) + 1) == 1){
-    			player.health -= enemy.moves.m3.dmg * 2;
-          console.log("critical");
-          crit_text = 300;
-          crit.play();
-    		}
+    	 if(enemy.moves.m3.type == "attack"){
+          player.health -= enemy.moves.m3.dmg;
+          power2 = enemy.moves.m3.dmg / 32;
+          if(Math.round(Math.random() * (1 - enemy.moves.m3.crit_chance) + 1) == 1){
+              player.health -= enemy.moves.m3.dmg * 2;
+              console.log("critical");
+              crit_text = 300;
+              crit.play();
+          }
+      }
+      if(enemy.moves.m3.type == "heal"){
+           enemy.health += enemy.moves.m3.dmg;
+           crit.play();
+      }
     }
   }
   shake = 2;
@@ -165,61 +185,91 @@ hurt.play();
 console.log(player.health);
 function move1(){
 	if (game == true){
-    if (turn == 0){
-    hurt.play();
-      turn = 1;
-      enemy.health -= player.moves.m1.dmg;
-      power1 = player.moves.m1.dmg / 32;
-      if(Math.round(Math.random() * (1 - player.moves.m1.crit_chance) + 1) == 1){
-          enemy.health -= enemy.moves.m1.dmg * 2;
-          console.log("critical");
-          crit_text = 300;
-          crit.play();
+      if (turn == 0){
+      	  document.getElementById("buttons").innerHTML = "<button>Move</button>"
+          if(player.moves.m1.type == "attack") {
+              hurt.play();
+              turn = 1;
+              enemy.health -= player.moves.m1.dmg;
+              power1 = player.moves.m1.dmg / 32;
+              if(Math.round(Math.random() * (1 - player.moves.m1.crit_chance) + 1) == 1){
+                  enemy.health -= enemy.moves.m1.dmg * 2;
+                  console.log("critical");
+                  crit_text = 300;
+                  crit.play();
+              }
+          }
+          
+          if(player.moves.m1.type == "heal") {
+          		if (player.health < b1 * 40) {
+                	player.health += player.moves.m1.dmg;
+                }
+          		crit.play();
+          }
+          shake = 2;
+          setTimeout(moveAfter, 1000);
+          console.log(enemy.health);
       }
-      shake = 2;
-      setTimeout(moveAfter, 1000);
-      console.log(enemy.health);
-    }
   }
 }
 
 function move2(){
 	if (game == true){
-    if (turn == 0){
-    hurt.play();
-      turn = 1;
-      enemy.health -= player.moves.m2.dmg;
-      power1 = player.moves.m2.dmg / 32;
-      if(Math.round(Math.random() * (1 - player.moves.m2.crit_chance) + 1) == 1){
-          enemy.health -= enemy.moves.m2.dmg * 2;
-          console.log("critical");
-          crit_text = 300;
-          crit.play();
+      if (turn == 0){
+      	  document.getElementById("buttons").innerHTML = "<button>Move</button>"
+          if(player.moves.m2.type == "attack") {
+              hurt.play();
+              turn = 1;
+              enemy.health -= player.moves.m2.dmg;
+              power1 = player.moves.m2.dmg / 32;
+              if(Math.round(Math.random() * (1 - player.moves.m2.crit_chance) + 1) == 1){
+                  enemy.health -= enemy.moves.m2.dmg * 2;
+                  console.log("critical");
+                  crit_text = 300;
+                  crit.play();
+              }
+          }
+          
+          if(player.moves.m2.type == "heal") {
+          		if (player.health < b1 * 40) {
+                	player.health += player.moves.m2.dmg;
+                }
+          		crit.play();
+          }
+          shake = 2;
+          setTimeout(moveAfter, 1000);
+          console.log(enemy.health);
       }
-      shake = 2;
-      setTimeout(moveAfter, 1000);
-      console.log(enemy.health);
-    }
   }
 }
 
 function move3(){
 	if (game == true){
-    if (turn == 0){
-    hurt.play();
-      turn = 1;
-      enemy.health -= player.moves.m3.dmg;
-      power1 = player.moves.m3.dmg / 32;
-      if(Math.round(Math.random() * (1 - player.moves.m3.crit_chance) + 1) == 1){
-          enemy.health -= enemy.moves.m3.dmg * 2;
-          console.log("critical");
-          crit_text = 300;
-          crit.play();
+      if (turn == 0){
+      	  document.getElementById("buttons").innerHTML = "<button>Move</button>"
+          if(player.moves.m3.type == "attack") {
+              hurt.play();
+              turn = 1;
+              enemy.health -= player.moves.m3.dmg;
+              power1 = player.moves.m3.dmg / 32;
+              if(Math.round(Math.random() * (1 - player.moves.m3.crit_chance) + 1) == 1){
+                  enemy.health -= enemy.moves.m3.dmg * 2;
+                  console.log("critical");
+                  crit_text = 300;
+                  crit.play();
+              }
+          }
+          
+          if(player.moves.m3.type == "heal") {
+          		if (player.health < b1 * 40) {
+                	player.health += player.moves.m3.dmg;
+                }
+          		crit.play();
+          }
+          shake = 2;
+          setTimeout(moveAfter, 1000);
+          console.log(enemy.health);
       }
-      shake = 2;
-      setTimeout(moveAfter, 1000);
-      console.log(enemy.health);
-    }
   }
 }
 
@@ -254,7 +304,12 @@ base_bg.src = "https://sjrnoodles.github.io/battle_simulator/assets/bg_canvas.pn
     }
   }
   
+  var h1 = 0;
+  var h2 = 0;
+  
   function gui_render(){
+  h1 += ((player.health / b1) - h1) / 4;
+  h2 += ((enemy.health / b2) - h2) / 4;
   // player health
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, 75, 10);
@@ -263,7 +318,7 @@ ctx.fillStyle = "white";
 ctx.textAlign = "center";
 ctx.fillText("Health:", 16, 8);
 ctx.fillStyle = "green";
-  ctx.fillRect(30, 3, player.health / b1, 5);
+  ctx.fillRect(30, 3, h1, 5);
   
   // enemy health
   ctx.fillStyle = "black";
@@ -273,7 +328,7 @@ ctx.fillStyle = "white";
 ctx.textAlign = "center";
 ctx.fillText("Health:", 120, 8);
 ctx.fillStyle = "red";
-  ctx.fillRect(135, 3, enemy.health / b2, 5);
+  ctx.fillRect(135, 3, h2, 5);
   }
   
   function render(){
@@ -302,16 +357,18 @@ ctx.fillStyle = "red";
   	bgLink = document.getElementById("bg").value;
   	musicLink = document.getElementById("mc").value;
   	player = JSON.parse(readJSON(playerJSONLink));
-		enemy = JSON.parse(readJSON(enemyJSONLink));
+	enemy = JSON.parse(readJSON(enemyJSONLink));
     music.src = musicLink;
     base_bg.src = bgLink;
     b1 = (player.health / 40);
-		b2 = (enemy.health / 40);
+	b2 = (enemy.health / 40);
+    h2 = enemy.health
+    h1 = player.health
     
   	music.play();
   	game=true;
   }
- window.onload = setInterval(render,1000/24);
+ window.onload = setInterval(render,1000/30);
 </script>
 
 </html>
