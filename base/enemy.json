@@ -16,7 +16,7 @@
       "crit_chance":5
     },
     "m3":{
-      "name":"scratch,
+      "name":"scratch",
       "type":"attack",
       "dmg":650,
       "crit_chance":2
