@@ -6,7 +6,7 @@
     "m1":{
       "name":"might",
       "type":"heal",
-      "dmg":4050,
+      "dmg":2050,
       "crit_chance":3
     },
     "m2":{
