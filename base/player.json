@@ -4,9 +4,9 @@
   "health":9200,
   "moves": {
     "m1":{
-      "name":"sword",
-      "type":"attack",
-      "dmg":250,
+      "name":"might",
+      "type":"heal",
+      "dmg":650,
       "crit_chance":3
     },
     "m2":{
