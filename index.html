@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html>
 <style>
@@ -356,9 +357,10 @@ ctx.fillStyle = "red";
     power1 += power1 * -0.3;
     power2 += power2 * -0.3;
     
-    if (enemy.health < 1 || player.health < 1) {
-    	if (enemy.health < 1){player.health = b1 * 40;enemy.health = 0;}
+    if (enemy.health < 1){player.health = b1 * 40;enemy.health = 0;}
       if (player.health < 1){enemy.health = b2 * 40; player.health = 0;}
+    
+    if (enemy.health < 1 || player.health < 1) {
     	game=false;
     }
   }
