@@ -1,12 +1,22 @@
 
+
 <!DOCTYPE html>
 <html>
 <style>
-html,body{
+html{
 margin:0;
 width:100%;
-height:100%;
+height:100;;
 font-family:Arial;
+background: url("https://sjrnoodles.github.io/battle_simulator/assets/site/0090b.jpg");
+}
+#content{
+margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+text-align:center;
+background:white;
+border-radius:10px;
 }
 h1 {
 text-align:center;
@@ -40,8 +50,8 @@ padding:5px;
 border:none;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <body>
+<div id="content">
 <h1 id="head">Battle Simulator</h1>
 	<a href="/battle_simulator/tutorial/">Tutorial</a>
 Welcome to the Battle Simulator! A basic battle simulator with moddable characters!
@@ -77,6 +87,7 @@ Background (must be 180x120)
 <br>
 Music (.mp3 - .wav)
 <input type="text" id="mc" name="mc" value="https://vgmsite.com/soundtracks/crows-claw-final-fantasy-hm-arrange/xgposhww/05.%20tina%27s%20theme%20%5Bfinal%20fantasy%206%5D.mp3">
+</div>
 </body>
 
 <script>
